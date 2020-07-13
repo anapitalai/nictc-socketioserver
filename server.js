@@ -6,8 +6,8 @@ const app = express()
 
 
 
-const server = app.listen(4000, function () {
-    console.log('Listening on port 4000')
+const server = app.listen(3010, function () {
+    console.log('Listening on port 3010')
 })
 
 app.use(function (req, res, next) {
