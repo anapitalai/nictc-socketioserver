@@ -10,6 +10,13 @@ const server = app.listen(4000, function () {
     console.log('Listening on port 4000')
 })
 
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'PUT,POST,PATCH,DELETE,GET');
+  res.header('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept');
+  next();
+});
+
 
 //socket setup
 const io = socket(server)
