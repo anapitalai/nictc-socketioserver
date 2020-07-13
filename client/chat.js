@@ -1,4 +1,4 @@
-const socket=io.connect('http://localhost:4000')
+const socket=io.connect('https://realtime.nictconsultants.com')
 
 
 const name=document.getElementById('name')
