@@ -24,7 +24,7 @@ function plot_map() {
             document.getElementById('height').textContent = ht
             const map=document.getElementById('mymap')
 
-            const mymap = L.map('mymap').setView([-4.786, 46.666], 0);
+            const mymap = L.map('mymap').setView([-2.786, 46.666], 0);
             const attribution =
                 '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
             const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
