@@ -8,10 +8,6 @@ const send = document.getElementById('send')
 const typing = document.getElementById('typing')
 
 
-navigator.geolocation.getCurrentPosition(post => {
-    let latitude = post.coords.latitude
-    let longitude = post.coords.longitude
-})
 
 send.addEventListener('click', function () {
     navigator.geolocation.getCurrentPosition(post => {
