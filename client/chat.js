@@ -8,10 +8,16 @@ const send=document.getElementById('send')
 const typing=document.getElementById('typing')
 
 
+navigator.geolocation.getCurrentPosition(post=>{
+    let latitude=post.coords.latitude
+    let longitude=post.coords.longitude
+})
 
 send.addEventListener('click',function(){
     socket.emit('chat',{
         name:name.value,
+        latitude:latitude,
+        longitude:longitude,
         message:message.value    
     })
 
@@ -31,7 +37,7 @@ message.addEventListener('keypress',function(){
 })
 
 socket.on('typing',function(data){
-    typing.innerHTML = '<p><em>' + data + ' is typing a message...' + ':</em></p>'
+    typing.innerHTML = '<p><em>' + data.name + ' is typing a message...' + ' at the coordinates' + latitude+':'+ longitude + ':</em></p>'
 
 })
 
