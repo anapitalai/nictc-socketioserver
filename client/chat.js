@@ -24,24 +24,28 @@ function plot_map() {
             document.getElementById('height').textContent = ht;
 
 
-            const mymap = L.map('mymap').setView([lat, lon], 5);
+            const mymap = L.map('mymap').setView([-6.786, 46.666], 0);
             const attribution =
                 '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
             const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
             const tiles = L.tileLayer(tileUrl, { attribution });
             tiles.addTo(mymap);
-            const current_marker = L.marker([lat, lon]).addTo(mymap)
-                .bindPopup('My location<br>')
-                .openPopup();
+            const current_marker = L.marker([-6.786, 46.666]).addTo(mymap)
+                .bindPopup('Map Center<br>')
+                .openPopup()
+
+            const a_marker = L.marker([-6.786, 47.666]).addTo(mymap)
+            .bindPopup('marker a<br>')
+            .openPopup()
                 
-            socket.emit('map', {
+            socket.emit('typing', {
                 name: name.value,
                 lat: lat,
                 lon: lon
             })
-            socket.on('map', function (data) {
+            socket.on('typing', function (data) {
                 console.log(data)
-                const marker = L.marker([data.lat, data.lon]).addTo(mymap)
+                const b = L.marker([data.lat, data.lon]).addTo(mymap)
                     .bindPopup('Remote Location<br>')
                     .openPopup();
     
