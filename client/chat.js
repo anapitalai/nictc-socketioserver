@@ -18,13 +18,13 @@ function plot_map() {
             acc = position.coords.accuracy
             ht = position.coords.height
             console.log(lat, lon, acc, ht)
-            document.getElementById('latitude').textContent = lat;
-            document.getElementById('longitude').textContent = lon;
-            document.getElementById('accuracy').textContent = acc;
-            document.getElementById('height').textContent = ht;
+            document.getElementById('latitude').textContent = lat
+            document.getElementById('longitude').textContent = lon
+            document.getElementById('accuracy').textContent = acc
+            document.getElementById('height').textContent = ht
+            const map=document.getElementById('mymap')
 
-
-            const mymap = L.map('mymap').setView([-6.786, 46.666], 0);
+            const mymap = L.map('mymap').setView([-4.786, 46.666], 0);
             const attribution =
                 '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
             const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -38,15 +38,15 @@ function plot_map() {
             .bindPopup('marker a<br>')
             .openPopup()
                 
-            socket.emit('typing', {
-                name: name.value,
+            socket.emit('map', {
+            
                 lat: lat,
                 lon: lon
             })
-            socket.on('typing', function (data) {
+            socket.on('map', function (data) {
                 console.log(data)
                 const b = L.marker([data.lat, data.lon]).addTo(mymap)
-                    .bindPopup('Remote Location<br>')
+                    .bindPopup('Remote loc')
                     .openPopup();
     
             })

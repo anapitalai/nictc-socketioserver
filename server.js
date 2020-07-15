@@ -40,7 +40,7 @@ io.on('connection', function (socket) {
 
     socket.on('map', function (data) {
         //emits all typing message to all connected sockets
-        socket.broadcast.emit('map', data)
+        io.emit('map', data)
         console.log(data)
     })
 
