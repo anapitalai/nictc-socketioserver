@@ -9,7 +9,7 @@ const typing = document.getElementById('typing')
 
 
 
-function plot_map(){
+function plot_map() {
     if ('geolocation' in navigator) {
         console.log('geolocation available');
         navigator.geolocation.getCurrentPosition(position => {
@@ -22,21 +22,46 @@ function plot_map(){
             document.getElementById('longitude').textContent = lon;
             document.getElementById('accuracy').textContent = acc;
             document.getElementById('height').textContent = ht;
-    
+
+
             const mymap = L.map('mymap').setView([lat, lon], 5);
             const attribution =
                 '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
             const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
             const tiles = L.tileLayer(tileUrl, { attribution });
             tiles.addTo(mymap);
-            const marker = L.marker([lat, lon]).addTo(mymap)
+            const current_marker = L.marker([lat, lon]).addTo(mymap)
+                .bindPopup('My location<br>')
+                .openPopup();
+                
+            socket.emit('map', {
+                name: name.value,
+                lat: lat,
+                lon: lon
+            })
+            socket.on('map', function (data) {
+                console.log(data)
+                const marker = L.marker([data.lat, data.lon]).addTo(mymap)
+                    .bindPopup('Remote Location<br>')
+                    .openPopup();
+    
+            })
+
+        })
+
+        //typing
+
+    /**    socket.on('map', function (data) {
+            const marker = L.marker([data.lat, data.lon]).addTo(mymap)
                 .bindPopup('Your location<br>')
                 .openPopup();
+
         })
+**/
     } else {
         console.log('geolocation not available');
     }
-    
+
 }
 //invoke map function
 plot_map()
@@ -72,6 +97,8 @@ socket.on('typing', function (data) {
     typing.innerHTML = '<p><em>' + data.name + ' is typing a message from cordinates [' + data.lat + ':' + data.lon + ']:</em></p>'
 
 })
+
+
 
 
 
