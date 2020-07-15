@@ -11,10 +11,10 @@ const server = app.listen(3010, function () {
 })
 
 app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'PUT,POST,PATCH,DELETE,GET');
-  res.header('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept');
-  next();
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'PUT,POST,PATCH,DELETE,GET');
+    res.header('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept');
+    next();
 });
 
 
@@ -32,11 +32,17 @@ io.on('connection', function (socket) {
         io.sockets.emit('chat', data)
     })
 
-        //handle message from the client
-        socket.on('typing', function (data) {
-            //emits all typing message to all connected sockets
-            socket.broadcast.emit('typing', data)
-        })
+    //handle message from the client
+    socket.on('typing', function (data) {
+        //emits all typing message to all connected sockets
+        socket.broadcast.emit('typing', data)
+    })
+
+    socket.on('map', function (data) {
+        //emits all typing message to all connected sockets
+        socket.broadcast.emit('map', map_data)
+    })
+
 })
 
 

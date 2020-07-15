@@ -4,18 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat App</title>
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin=""
+  />
+  <script
+    src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+    integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+    crossorigin=""
+  ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NICTC Chat App</title>
-</head>
-<body>
+
 
     <div id="manchatarea">
         <div id="chatwindow">
@@ -27,11 +31,18 @@
         Name:<input id="name" type="text" placeholder="Name"><br>
         Message:<input id="message" type="text" placeholder="Message"><br>
         <button id="send">Send</button>
+
+        <p>
+            latitude: <span id="latitude"></span>&deg;<br />
+            longitude: <span id="longitude"></span>&deg;<br />
+            accuracy: <span id="accuracy"></span><br />
+            altitude: <span id="height"></span>
+          </p>
+
+          <div id="mymap"></div>
     </div>
 
-    
-</body>
-</html>
+   
     
 
     <script src="chat.js"></script>

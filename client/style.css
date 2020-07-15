@@ -10,3 +10,8 @@ body{
     align-items: center;
     justify-content: center;
 }
+
+
+#mymap{
+    height: 380px;
+}
