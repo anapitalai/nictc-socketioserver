@@ -3,7 +3,7 @@ const socket = require('socket.io')
 
 
 const app = express()
-
+const markers = []
 
 
 const server = app.listen(3010, function () {
@@ -25,6 +25,18 @@ const io = socket(server)
 io.on('connection', function (socket) {
     console.log(
         'Connection made from the client', socket.id)
+
+ 
+   socket.on('markers', data => {
+        markers.push(data);
+
+        io.sockets.emit("markers", markers);
+    
+    });
+
+   
+
+
 
     //handle message from the client
     socket.on('chat', function (data) {

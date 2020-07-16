@@ -9,7 +9,13 @@ const typing = document.getElementById('typing')
 
 
 
+
 function plot_map() {
+
+    state = {
+        location:
+            { lat: null, lon: null }
+    }
     if ('geolocation' in navigator) {
         console.log('geolocation available');
         navigator.geolocation.getCurrentPosition(position => {
@@ -17,38 +23,46 @@ function plot_map() {
             lon = position.coords.longitude
             acc = position.coords.accuracy
             ht = position.coords.height
+
             console.log(lat, lon, acc, ht)
+            this.state = {
+                location: {
+                    lat: lat,
+                    lon: lon
+                }
+            }
+
+
+
             document.getElementById('latitude').textContent = lat
             document.getElementById('longitude').textContent = lon
             document.getElementById('accuracy').textContent = acc
             document.getElementById('height').textContent = ht
-           
 
-    
-            const mymap = L.map('mymap').setView([lat,lon], 0)
+
+            const cords = [this.state.location.lat, this.state.location.lon]
+            socket.emit('markers', cords)
+            const mymap = L.map('mymap').setView(cords, 6)
             const attribution =
                 '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
             const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
             const tiles = L.tileLayer(tileUrl, { attribution })
             tiles.addTo(mymap)
 
-        
-            const current_marker = L.marker([lat,lon]).addTo(mymap)
-                .bindPopup('Initiator<br>')
-                .openPopup()
-    
-                
-            socket.emit('map', {
-            
-                lat: lat,
-                lon: lon
-            })
-            socket.on('map', function (data) {
-                console.log(data)
-                //const b = L.marker([data.lat, data.lon]).addTo(mymap)
-                //    .bindPopup('Remote loc')
-                //    .openPopup();
-    
+            //socket.emit('markers', {
+
+            //    lat: lat,
+            //    lon: lon
+            //})
+            socket.on('markers', function(data){
+
+                data.forEach(function(i){
+
+                    L.marker(cords).addTo(mymap)
+                        .bindPopup('I am at ' +i)
+                        .openPopup();
+
+                });
             })
 
         })
