@@ -28,9 +28,9 @@ io.on('connection', function (socket) {
 
  
    socket.on('markers', data => {
-        markers.push(data);
+        markers.push(data)
 
-        io.sockets.emit("markers", markers);
+        io.sockets.emit("marker_location", markers);
     
     });
 

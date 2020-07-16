@@ -54,11 +54,11 @@ function plot_map() {
             //    lat: lat,
             //    lon: lon
             //})
-            socket.on('markers', function(data){
+            socket.on('marker_location', function(data){
 
                 data.forEach(function(i){
 
-                    L.marker(cords).addTo(mymap)
+                    L.marker(i).addTo(mymap)
                         .bindPopup('I am at ' +i)
                         .openPopup();
 
