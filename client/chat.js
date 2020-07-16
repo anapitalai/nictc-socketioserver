@@ -22,20 +22,9 @@ function plot_map() {
             document.getElementById('longitude').textContent = lon
             document.getElementById('accuracy').textContent = acc
             document.getElementById('height').textContent = ht
-            const map=document.getElementById('mymap')
+           
 
-            //icon
-            var greenIcon = L.icon({
-                iconUrl: 'leaf-green.png',
-                shadowUrl: 'leaf-shadow.png',
-            
-                iconSize:     [38, 95], 
-                shadowSize:   [50, 64], 
-                iconAnchor:   [22, 94], 
-                shadowAnchor: [4, 62],  
-                popupAnchor:  [-3, -76] 
-            });
-
+    
             const mymap = L.map('mymap').setView([lat,lon], 0)
             const attribution =
                 '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
@@ -45,13 +34,9 @@ function plot_map() {
 
         
             const current_marker = L.marker([lat,lon]).addTo(mymap)
-                .bindPopup('Map Center<br>')
+                .bindPopup('Initiator<br>')
                 .openPopup()
-        
-
-            const a_marker = L.marker([-6.786, 47.666]).addTo(mymap)
-            .bindPopup('marker a<br>')
-            .openPopup()
+    
                 
             socket.emit('map', {
             
@@ -60,23 +45,15 @@ function plot_map() {
             })
             socket.on('map', function (data) {
                 console.log(data)
-                const b = L.marker([data.lat, data.lon]).addTo(mymap)
-                    .bindPopup('Remote loc')
-                    .openPopup();
+                //const b = L.marker([data.lat, data.lon]).addTo(mymap)
+                //    .bindPopup('Remote loc')
+                //    .openPopup();
     
             })
 
         })
 
-        //typing
 
-    /**    socket.on('map', function (data) {
-            const marker = L.marker([data.lat, data.lon]).addTo(mymap)
-                .bindPopup('Your location<br>')
-                .openPopup();
-
-        })
-**/
     } else {
         console.log('geolocation not available');
     }
