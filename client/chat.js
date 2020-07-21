@@ -1,5 +1,5 @@
-//const socket=io.connect('https://realtime.nictconsultants.com')
-const socket = io.connect('http://localhost:3010')
+const socket=io.connect('https://realtime.nictconsultants.com')
+//const socket = io.connect('http://localhost:3010')
 
 const name = document.getElementById('name')
 const message = document.getElementById('message')
