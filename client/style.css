@@ -1,17 +1,56 @@
 html,body{
+    width:100%;
     height: 100%;
+
     margin:0;
+    
     padding: 0;
 }
 
-
 body{
     display: flex;
+
     align-items: center;
+    
     justify-content: center;
 }
 
-
 #mymap{
-    height: 380px;
+    height:340px;
+    width:50%;
+    float:right;
+   
+}
+
+#chatarea{
+    padding:5px;
+    margin:5px;
+    width:auto;
+
+    float:left;
+}
+
+@media(max-width:500px){
+    #mymap{
+        height: 280px;;
+        float:none;
+         width:100%;
+    }
+    
+    #chatarea{
+        height:220px;
+      float:none;
+      margin:5px;
+      padding: 5px;
+    }
+    body{
+        display:flex;
+        flex-direction: column;
+    }
+}
+
+
+.btn{
+    color: #000;
+    border-radius: 5px;;
 }

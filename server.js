@@ -23,19 +23,21 @@ const io = socket(server)
 
 
 io.on('connection', function (socket) {
-    console.log(
-        'Connection made from the client', socket.id)
+    console.log('Connection made from the client', socket.id)
 
- 
-   socket.on('markers', data => {
+    //received message from the client
+    socket.on('markers', data => {
         markers.push(data)
+        console.log(data.n)
 
+        //emits the message to the connected sockets including the sender
         io.sockets.emit("marker_location", markers);
-    
+        //emits the message to the connected sockets except the sender
+        //io.broadcast.emit("marker_location", markers);
     });
 
-   
 
+//
 
 
     //handle message from the client
