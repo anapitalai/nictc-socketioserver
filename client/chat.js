@@ -114,6 +114,16 @@ socket.on('typing', function (data) {
 })
 
 
+// live text editing
+const editor = document.getElementById('editor');
+editor.addEventListener("keyup", (evt) => {
+    const text = editor.value
+    socket.send(text)
+})
+socket.on('edit_text', (data) => {
+    editor.value = data
+})
+
 
 
 

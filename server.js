@@ -58,6 +58,23 @@ io.on('connection', function (socket) {
         console.log(data)
     })
 
+
+
+
+    socket.on('disconnect', (evt) => {
+        console.log('A user left')
+    })
+
+
+    //editor
+    io.on('connection', (socket) => {
+        console.log('connected for editing')
+        socket.on('edit_text', (evt) => {
+            log(evt)
+            socket.broadcast.emit('edit_text', evt)
+        })
+    })
+
 })
 
 
